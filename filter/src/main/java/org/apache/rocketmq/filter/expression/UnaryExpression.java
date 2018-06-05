@@ -53,6 +53,7 @@ public abstract class UnaryExpression implements Expression {
 
     public static Expression createNegate(Expression left) {
         return new UnaryExpression(left, UnaryType.NEGATE) {
+            @Override
             public Object evaluate(EvaluationContext context) throws Exception {
                 Object rvalue = right.evaluate(context);
                 if (rvalue == null) {
@@ -85,6 +86,7 @@ public abstract class UnaryExpression implements Expression {
         final Collection inList = t;
 
         return new UnaryInExpression(right, UnaryType.IN, inList, not) {
+            @Override
             public Object evaluate(EvaluationContext context) throws Exception {
 
                 Object rvalue = right.evaluate(context);
@@ -147,6 +149,7 @@ public abstract class UnaryExpression implements Expression {
 
     public static BooleanExpression createNOT(BooleanExpression left) {
         return new BooleanUnaryExpression(left, UnaryType.NOT) {
+            @Override
             public Object evaluate(EvaluationContext context) throws Exception {
                 Boolean lvalue = (Boolean) right.evaluate(context);
                 if (lvalue == null) {
@@ -163,6 +166,7 @@ public abstract class UnaryExpression implements Expression {
 
     public static BooleanExpression createBooleanCast(Expression left) {
         return new BooleanUnaryExpression(left, UnaryType.BOOLEANCAST) {
+            @Override
             public Object evaluate(EvaluationContext context) throws Exception {
                 Object rvalue = right.evaluate(context);
                 if (rvalue == null) {

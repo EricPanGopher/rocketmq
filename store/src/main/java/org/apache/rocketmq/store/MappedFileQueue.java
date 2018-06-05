@@ -177,8 +177,9 @@ public class MappedFileQueue {
     }
 
     public long howMuchFallBehind() {
-        if (this.mappedFiles.isEmpty())
+        if (this.mappedFiles.isEmpty()) {
             return 0;
+        }
 
         long committed = this.flushedWhere;
         if (committed != 0) {

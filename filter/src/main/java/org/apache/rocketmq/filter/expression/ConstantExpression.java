@@ -89,6 +89,7 @@ public class ConstantExpression implements Expression {
         return new NowExpression();
     }
 
+    @Override
     public Object evaluate(EvaluationContext context) throws Exception {
         return value;
     }

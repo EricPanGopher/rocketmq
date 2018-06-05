@@ -29,6 +29,7 @@ import org.apache.rocketmq.filter.expression.MQFilterException;
 import org.apache.rocketmq.filter.expression.PropertyExpression;
 import org.apache.rocketmq.filter.expression.UnaryExpression;
 
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 
@@ -50,15 +51,6 @@ public class SelectorParser implements SelectorParserConstants {
         } else if (result instanceof BooleanExpression) {
             return (BooleanExpression) result;
         } else {
-
-            //            boolean convertStringExpressions = false;
-            //            if( sql.startsWith(CONVERT_STRING_EXPRESSIONS_PREFIX)) {
-            //                convertStringExpressions = true;
-            //                sql = sql.substring(CONVERT_STRING_EXPRESSIONS_PREFIX.length());
-            //            }
-            //            if( convertStringExpressions ) {
-            //                ComparisonExpression.CONVERT_STRING_EXPRESSIONS.set(true);
-            //            }
             ComparisonExpression.CONVERT_STRING_EXPRESSIONS.set(true);
             try {
 
@@ -70,9 +62,6 @@ public class SelectorParser implements SelectorParserConstants {
                 throw t;
             } finally {
                 ComparisonExpression.CONVERT_STRING_EXPRESSIONS.remove();
-                //                if( convertStringExpressions ) {
-                //                    ComparisonExpression.CONVERT_STRING_EXPRESSIONS.remove();
-                //                }
             }
         }
     }
@@ -113,8 +102,9 @@ public class SelectorParser implements SelectorParserConstants {
         Expression left = null;
         left = orExpression();
         {
-            if (true)
+            if (true) {
                 return asBooleanExpression(left);
+            }
         }
         throw new Error("Missing return statement in function");
     }
@@ -1055,25 +1045,30 @@ public class SelectorParser implements SelectorParserConstants {
         token = new Token();
         jjNtk = -1;
         jjGen = 0;
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 13; i++) {
             jjLa1[i] = -1;
-        for (int i = 0; i < jj2Rtns.length; i++)
+        }
+        for (int i = 0; i < jj2Rtns.length; i++) {
             jj2Rtns[i] = new JJCalls();
+        }
+
     }
 
     /**
      * Constructor.
      */
-    public SelectorParser(java.io.Reader stream) {
+    public SelectorParser(Reader stream) {
         jjInputStream = new SimpleCharStream(stream, 1, 1);
         tokenSource = new SelectorParserTokenManager(jjInputStream);
         token = new Token();
         jjNtk = -1;
         jjGen = 0;
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 13; i++) {
             jjLa1[i] = -1;
-        for (int i = 0; i < jj2Rtns.length; i++)
+        }
+        for (int i = 0; i < jj2Rtns.length; i++) {
             jj2Rtns[i] = new JJCalls();
+        }
     }
 
     /**

@@ -264,22 +264,27 @@ public class BloomFilter {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof BloomFilter))
+        }
+        if (!(o instanceof BloomFilter)) {
             return false;
+        }
 
         BloomFilter that = (BloomFilter) o;
 
-        if (f != that.f)
+        if (f != that.f) {
             return false;
-        if (k != that.k)
+        }
+        if (k != that.k) {
             return false;
-        if (m != that.m)
+        }
+        if (m != that.m) {
             return false;
-        if (n != that.n)
+        }
+        if (n != that.n) {
             return false;
-
+        }
         return true;
     }
 

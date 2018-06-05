@@ -749,8 +749,9 @@ public class SelectorParserTokenManager implements SelectorParserConstants {
      * Constructor.
      */
     public SelectorParserTokenManager(SimpleCharStream stream) {
-        if (SimpleCharStream.STATIC_FLAG)
+        if (SimpleCharStream.STATIC_FLAG) {
             throw new Error("ERROR: Cannot use a static CharStream class with a non-static lexical analyzer.");
+        }
         inputStream = stream;
     }
 

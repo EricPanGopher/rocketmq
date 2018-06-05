@@ -120,6 +120,7 @@ public class AllocateMappedFileService extends ServiceThread {
         return AllocateMappedFileService.class.getSimpleName();
     }
 
+    @Override
     public void shutdown() {
         this.stopped = true;
         this.thread.interrupt();
@@ -138,6 +139,7 @@ public class AllocateMappedFileService extends ServiceThread {
         }
     }
 
+    @Override
     public void run() {
         log.info(this.getServiceName() + " service started");
 
