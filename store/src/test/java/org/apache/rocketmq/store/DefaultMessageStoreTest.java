@@ -22,6 +22,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.channels.OverlappingFileLockException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -191,6 +192,7 @@ public class DefaultMessageStoreTest {
         @Override
         public void arriving(String topic, int queueId, long logicOffset, long tagsCode, long msgStoreTime,
                              byte[] filterBitMap, Map<String, String> properties) {
+            System.out.println(String.format("Topic is %s, filterBitMap", topic, Arrays.toString(filterBitMap)));
         }
     }
 }

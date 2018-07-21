@@ -84,7 +84,7 @@ public class NamesrvStartup {
             }
 
             MixAll.properties2Object(ServerUtil.commandLine2Properties(commandLine), namesrvConfig);
-
+            namesrvConfig.setRocketmqHome("/Users/eric/Documents/Dev/apache/rocketmq/distribution/");
             if (null == namesrvConfig.getRocketmqHome()) {
                 System.out.printf("Please set the %s variable in your environment to match the location of the RocketMQ installation%n", MixAll.ROCKETMQ_HOME_ENV);
                 System.exit(-2);
