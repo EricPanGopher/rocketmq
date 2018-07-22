@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
@@ -190,6 +191,9 @@ public class MappedFile extends ReferenceResource {
         return fileChannel;
     }
 
+//
+//    append message core logic
+//
     public AppendMessageResult appendMessage(final MessageExtBrokerInner msg, final AppendMessageCallback cb) {
         return appendMessagesInner(msg, cb);
     }
@@ -227,6 +231,9 @@ public class MappedFile extends ReferenceResource {
         return this.fileFromOffset;
     }
 
+//
+//    append message  写入到mappedfile中
+//
     public boolean appendMessage(final byte[] data) {
         int currentPos = this.wrotePosition.get();
 

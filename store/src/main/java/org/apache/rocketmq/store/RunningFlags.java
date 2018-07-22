@@ -16,6 +16,11 @@
  */
 package org.apache.rocketmq.store;
 
+/**
+ *
+ * 位运算 -> flag
+ *
+ */
 public class RunningFlags {
 
     private static final int NOT_READABLE_BIT = 1;

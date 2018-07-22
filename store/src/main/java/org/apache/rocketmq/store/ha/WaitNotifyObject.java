@@ -22,6 +22,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
+//
+// for ha service
+//
 public class WaitNotifyObject {
     private static final Logger log = LoggerFactory.getLogger(LoggerName.STORE_LOGGER_NAME);
 

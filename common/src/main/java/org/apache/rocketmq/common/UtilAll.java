@@ -71,7 +71,9 @@ public class UtilAll {
 
         return sb.toString();
     }
-
+//
+//    commit log file name generator
+//
     public static String offset2FileName(final long offset) {
         final NumberFormat nf = NumberFormat.getInstance();
         nf.setMinimumIntegerDigits(20);

@@ -28,6 +28,14 @@ import org.apache.rocketmq.store.SelectMappedBufferResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ *
+ * High avaliable connection
+ *
+ *
+ *
+ */
 public class HAConnection {
     private static final Logger log = LoggerFactory.getLogger(LoggerName.STORE_LOGGER_NAME);
     private final HAService haService;

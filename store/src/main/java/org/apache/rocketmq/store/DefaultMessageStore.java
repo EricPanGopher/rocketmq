@@ -1093,6 +1093,7 @@ public class DefaultMessageStore implements MessageStore {
 
         ConsumeQueue logic = map.get(queueId);
         if (null == logic) {
+//             创建consume queue -> commitlog mapping consume queue
             ConsumeQueue newLogic = new ConsumeQueue(
                 topic,
                 queueId,

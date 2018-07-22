@@ -111,6 +111,7 @@ public class ConsumeQueueTest {
                 @Override
                 public void arriving(String topic, int queueId, long logicOffset, long tagsCode,
                     long msgStoreTime, byte[] filterBitMap, Map<String, String> properties) {
+
                 }
             }
             , brokerConfig);
@@ -184,7 +185,7 @@ public class ConsumeQueueTest {
                 messageStore.shutdown();
                 messageStore.destroy();
             }
-            deleteDirectory(storePath);
+//            deleteDirectory(storePath);
         }
 
     }
