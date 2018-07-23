@@ -174,8 +174,6 @@ public class KVConfigManager {
         try {
             this.lock.readLock().lockInterruptibly();
             try {
-                log.info("--------------------------------------------------------");
-
                 {
                     log.info("configTable SIZE: {}", this.configTable.size());
                     Iterator<Entry<String, HashMap<String, String>>> it =

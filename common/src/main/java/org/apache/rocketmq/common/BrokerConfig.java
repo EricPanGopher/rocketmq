@@ -31,7 +31,8 @@ public class BrokerConfig {
 
     private String rocketmqHome = "/Users/sier/Documents/Apache/rocketmq/distribution";
     @ImportantField
-    private String namesrvAddr = System.getProperty(MixAll.NAMESRV_ADDR_PROPERTY, System.getenv(MixAll.NAMESRV_ADDR_ENV));
+//    private String namesrvAddr = System.getProperty(MixAll.NAMESRV_ADDR_PROPERTY, System.getenv(MixAll.NAMESRV_ADDR_ENV));
+    private String namesrvAddr = "localhost:9876";
     @ImportantField
     private String brokerIP1 = RemotingUtil.getLocalAddress();
     private String brokerIP2 = RemotingUtil.getLocalAddress();
@@ -248,7 +249,7 @@ public class BrokerConfig {
     }
 
     public String getRocketmqHome() {
-        return rocketmqHome;
+        return "/Users/eric/Documents/Dev/apache/rocketmq/distribution/";
     }
 
     public void setRocketmqHome(String rocketmqHome) {

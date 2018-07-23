@@ -32,7 +32,7 @@ public class MappedFileQueueTest {
         final String fixedMsg = "0123456789abcdef";
 
         MappedFileQueue mappedFileQueue =
-            new MappedFileQueue("target/unit_test_store/a/", 1024, null);
+            new MappedFileQueue("./unit_test_store/a/", 1024, null);
 
         for (int i = 0; i < 1024; i++) {
             MappedFile mappedFile = mappedFileQueue.getLastMappedFile(0);

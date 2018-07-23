@@ -545,7 +545,7 @@ public class RouteInfoManager {
         try {
             try {
                 this.lock.readLock().lockInterruptibly();
-                log.info("--------------------------------------------------------");
+                log.info("================================================================================");
                 {
                     log.info("topicQueueTable SIZE: {}", this.topicQueueTable.size());
                     Iterator<Entry<String, List<QueueData>>> it = this.topicQueueTable.entrySet().iterator();

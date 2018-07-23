@@ -20,7 +20,7 @@ import java.io.File;
 
 public class StorePathConfigHelper {
 
-    public static String getStorePathConsumeQueue(final String rootDir) {
+    public static String wgetStorePathConsumeQueue(final String rootDir) {
         return rootDir + File.separator + "consumequeue";
     }
 

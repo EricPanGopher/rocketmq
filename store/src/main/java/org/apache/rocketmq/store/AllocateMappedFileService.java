@@ -52,6 +52,10 @@ public class AllocateMappedFileService extends ServiceThread {
         this.messageStore = messageStore;
     }
 
+
+//
+//
+//
     public MappedFile putRequestAndReturnMappedFile(String nextFilePath, String nextNextFilePath, int fileSize) {
         int canSubmitRequests = 2;
         if (this.messageStore.getMessageStoreConfig().isTransientStorePoolEnable()) {
@@ -71,6 +75,9 @@ public class AllocateMappedFileService extends ServiceThread {
                 this.requestTable.remove(nextFilePath);
                 return null;
             }
+//
+//            添加到request queue
+//
             boolean offerOK = this.requestQueue.offer(nextReq);
             if (!offerOK) {
                 log.warn("never expected here, add a request to preallocate queue failed");
@@ -231,6 +238,11 @@ public class AllocateMappedFileService extends ServiceThread {
         return true;
     }
 
+//
+//
+//    allocate message request
+//
+//
     static class AllocateRequest implements Comparable<AllocateRequest> {
         // Full file path
         private String filePath;

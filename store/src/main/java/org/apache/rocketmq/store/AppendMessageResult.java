@@ -31,6 +31,10 @@ public class AppendMessageResult {
     // Message storage timestamp
     private long storeTimestamp;
     // Consume queue's offset(step by one)
+
+//    UNKNOWN
+//    what fuck is this
+//
     private long logicsOffset;
     private long pagecacheRT = 0;
 

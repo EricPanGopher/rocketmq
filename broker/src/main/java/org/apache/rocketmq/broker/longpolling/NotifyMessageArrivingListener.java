@@ -21,6 +21,12 @@ import org.apache.rocketmq.store.MessageArrivingListener;
 
 import java.util.Map;
 
+
+//
+//
+//   消息到达listener
+//
+//
 public class NotifyMessageArrivingListener implements MessageArrivingListener {
     private final PullRequestHoldService pullRequestHoldService;
 
