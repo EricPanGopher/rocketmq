@@ -19,6 +19,10 @@ package org.apache.rocketmq.store;
 /**
  * Used when trying to put message
  */
+
+//
+//    put message lock : spin lock && mutex lock
+//
 public interface PutMessageLock {
     void lock();
 

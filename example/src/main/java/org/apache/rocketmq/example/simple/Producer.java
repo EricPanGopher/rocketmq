@@ -16,26 +16,66 @@
  */
 package org.apache.rocketmq.example.simple;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.constant.LoggerName;
 import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.remoting.RPCHook;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
+import org.apache.rocketmq.remoting.protocol.RemotingCommand;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Producer {
+    static Logger logger = null;
+
+    static {
+        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+        JoranConfigurator joranConfigurator = new JoranConfigurator();
+        joranConfigurator.setContext(lc);
+        lc.reset();
+
+        try {
+            joranConfigurator.doConfigure("/Users/sier/Documents/Apache/rocketmq/distribution/conf/logback_broker.xml");
+        } catch (JoranException e) {
+            e.printStackTrace();
+        }
+
+        logger = LoggerFactory.getLogger(LoggerName.NAMESRV_LOGGER_NAME);
+    }
+
     public static void main(String[] args) throws MQClientException, InterruptedException {
 
-        DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName");
+        RPCHook rpcHook = new RPCHook() {
+            @Override
+            public void doBeforeRequest(String remoteAddr, RemotingCommand request) {
+                logger.info("remoteAddr := {}", remoteAddr);
+
+            }
+
+            @Override
+            public void doAfterResponse(String remoteAddr, RemotingCommand request, RemotingCommand response) {
+
+            }
+        };
+        logger.info("========================================");
+        DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName", rpcHook);
 
         producer.start();
 
-        for (int i = 0; i < 10000000; i++)
+        for (int i = 0; i < 10000000; i++) {
             try {
                 {
                     Message msg = new Message("TopicTest",
-                        "TagA",
-                        "OrderID188",
-                        "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
+                            "TagA",
+                            "OrderID188",
+                            "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
                     SendResult sendResult = producer.send(msg);
                     System.out.printf("%s%n", sendResult);
                 }
@@ -43,6 +83,7 @@ public class Producer {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
 
         producer.shutdown();
     }

@@ -44,7 +44,7 @@ public class FiltersrvConfig {
     private int fsServerWorkerThreads = 64;
 
     public String getRocketmqHome() {
-        return rocketmqHome;
+        return "/Users/sier/Documents/Apache/rocketmq/distribution";
     }
 
     public void setRocketmqHome(String rocketmqHome) {

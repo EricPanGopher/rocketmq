@@ -27,6 +27,11 @@ import org.apache.rocketmq.common.ServiceThread;
 import org.apache.rocketmq.common.utils.ThreadUtils;
 import org.slf4j.Logger;
 
+
+/**
+ * pull messsage service
+ *  while put it in producer
+ */
 public class PullMessageService extends ServiceThread {
     private final Logger log = ClientLogger.getLog();
     private final LinkedBlockingQueue<PullRequest> pullRequestQueue = new LinkedBlockingQueue<PullRequest>();
@@ -43,6 +48,11 @@ public class PullMessageService extends ServiceThread {
         this.mQClientFactory = mQClientFactory;
     }
 
+    /**
+     *
+     * 延迟拉取消息
+     *
+     */
     public void executePullRequestLater(final PullRequest pullRequest, final long timeDelay) {
         this.scheduledExecutorService.schedule(new Runnable() {
 
@@ -53,6 +63,9 @@ public class PullMessageService extends ServiceThread {
         }, timeDelay, TimeUnit.MILLISECONDS);
     }
 
+//    向pull request queue中添加pull request
+//    run 方法中从queue中提取
+//
     public void executePullRequestImmediately(final PullRequest pullRequest) {
         try {
             this.pullRequestQueue.put(pullRequest);
@@ -68,7 +81,9 @@ public class PullMessageService extends ServiceThread {
     public ScheduledExecutorService getScheduledExecutorService() {
         return scheduledExecutorService;
     }
-
+//
+//     拉取到消息
+//
     private void pullMessage(final PullRequest pullRequest) {
         final MQConsumerInner consumer = this.mQClientFactory.selectConsumer(pullRequest.getConsumerGroup());
         if (consumer != null) {
@@ -86,9 +101,7 @@ public class PullMessageService extends ServiceThread {
         while (!this.isStopped()) {
             try {
                 PullRequest pullRequest = this.pullRequestQueue.take();
-                if (pullRequest != null) {
-                    this.pullMessage(pullRequest);
-                }
+                this.pullMessage(pullRequest);
             } catch (InterruptedException e) {
             } catch (Exception e) {
                 log.error("Pull Message Service Run Method exception", e);

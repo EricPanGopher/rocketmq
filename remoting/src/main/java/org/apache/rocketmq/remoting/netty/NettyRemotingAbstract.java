@@ -262,6 +262,9 @@ public abstract class NettyRemotingAbstract {
             if (responseFuture.getInvokeCallback() != null) {
                 executeInvokeCallback(responseFuture);
             } else {
+//
+//                 deal with response command
+//
                 responseFuture.putResponse(cmd);
                 responseFuture.release();
             }
@@ -368,6 +371,7 @@ public abstract class NettyRemotingAbstract {
                 public void operationComplete(ChannelFuture f) throws Exception {
                     if (f.isSuccess()) {
                         responseFuture.setSendRequestOK(true);
+//                        成功直接返回
                         return;
                     } else {
                         responseFuture.setSendRequestOK(false);

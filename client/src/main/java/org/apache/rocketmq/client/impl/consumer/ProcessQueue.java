@@ -37,6 +37,11 @@ import org.slf4j.Logger;
 /**
  * Queue consumption snapshot
  */
+
+
+//
+//    process queue
+//
 public class ProcessQueue {
     public final static long REBALANCE_LOCK_MAX_LIVE_TIME =
         Long.parseLong(System.getProperty("rocketmq.client.rebalance.lockMaxLiveTime", "30000"));

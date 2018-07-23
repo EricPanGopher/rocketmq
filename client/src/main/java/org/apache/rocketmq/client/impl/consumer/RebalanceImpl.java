@@ -43,6 +43,10 @@ import org.slf4j.Logger;
 /**
  * Base class for rebalance algorithm
  */
+
+//
+//    rebalance impl
+//
 public abstract class RebalanceImpl {
     protected static final Logger log = ClientLogger.getLog();
     protected final ConcurrentMap<MessageQueue, ProcessQueue> processQueueTable = new ConcurrentHashMap<MessageQueue, ProcessQueue>(64);

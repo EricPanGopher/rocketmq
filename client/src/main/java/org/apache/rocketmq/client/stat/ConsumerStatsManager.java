@@ -25,6 +25,9 @@ import org.apache.rocketmq.common.stats.StatsSnapshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//
+// consumer state manager
+//
 public class ConsumerStatsManager {
     private static final Logger log = LoggerFactory.getLogger(LoggerName.CLIENT_LOGGER_NAME);
 

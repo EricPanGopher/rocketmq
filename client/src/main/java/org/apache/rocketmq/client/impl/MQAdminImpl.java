@@ -54,6 +54,9 @@ import org.apache.rocketmq.remoting.netty.ResponseFuture;
 import org.apache.rocketmq.remoting.protocol.RemotingCommand;
 import org.slf4j.Logger;
 
+//
+// broker admin
+//
 public class MQAdminImpl {
 
     private final Logger log = ClientLogger.getLog();

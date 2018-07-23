@@ -256,6 +256,10 @@ public class MQClientInstance {
     }
 
     private void startScheduledTask() {
+//       在name address 不存在情况下
+//      定时更新nameaddress 地址信息 2分钟更新一次
+//        所以 nameaddress挂了 也不影响部分服务
+
         if (null == this.clientConfig.getNamesrvAddr()) {
             this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 
@@ -446,7 +450,7 @@ public class MQClientInstance {
             }
         }
     }
-
+//
     public void sendHeartbeatToAllBrokerWithLock() {
         if (this.lockHeartbeat.tryLock()) {
             try {
@@ -501,8 +505,9 @@ public class MQClientInstance {
             for (BrokerData bd : bds) {
                 if (bd.getBrokerAddrs() != null) {
                     boolean exist = bd.getBrokerAddrs().containsValue(addr);
-                    if (exist)
+                    if (exist) {
                         return true;
+                    }
                 }
             }
         }
@@ -532,11 +537,15 @@ public class MQClientInstance {
                         String addr = entry1.getValue();
                         if (addr != null) {
                             if (consumerEmpty) {
-                                if (id != MixAll.MASTER_ID)
+                                if (id != MixAll.MASTER_ID) {
                                     continue;
+                                }
                             }
 
                             try {
+//
+//                                 通过版本号version heart beat
+//
                                 int version = this.mQClientAPIImpl.sendHearbeat(addr, heartbeatData, 3000);
                                 if (!this.brokerVersionTable.containsKey(brokerName)) {
                                     this.brokerVersionTable.put(brokerName, new HashMap<String, Integer>(4));
@@ -585,6 +594,10 @@ public class MQClientInstance {
         }
     }
 
+
+//
+//    添加broker 信息
+//
     public boolean updateTopicRouteInfoFromNameServer(final String topic, boolean isDefault,
         DefaultMQProducer defaultMQProducer) {
         try {
@@ -670,6 +683,9 @@ public class MQClientInstance {
         return false;
     }
 
+//
+//    heart beat data 中包含了consumer data && producer data
+//
     private HeartbeatData prepareHeartbeatData() {
         HeartbeatData heartbeatData = new HeartbeatData();
 
@@ -803,16 +819,19 @@ public class MQClientInstance {
 
     public void shutdown() {
         // Consumer
-        if (!this.consumerTable.isEmpty())
+        if (!this.consumerTable.isEmpty()) {
             return;
+        }
 
         // AdminExt
-        if (!this.adminExtTable.isEmpty())
+        if (!this.adminExtTable.isEmpty()) {
             return;
+        }
 
         // Producer
-        if (this.producerTable.size() > 1)
+        if (this.producerTable.size() > 1) {
             return;
+        }
 
         synchronized (this) {
             switch (this.serviceState) {
@@ -879,6 +898,10 @@ public class MQClientInstance {
         }
     }
 
+
+//
+//    unregister
+//
     private void unregisterClient(final String producerGroup, final String consumerGroup) {
         Iterator<Entry<String, HashMap<Long, String>>> it = this.brokerAddrTable.entrySet().iterator();
         while (it.hasNext()) {
@@ -906,6 +929,9 @@ public class MQClientInstance {
         }
     }
 
+//
+//  维护producer信息
+//
     public boolean registerProducer(final String group, final DefaultMQProducerImpl producer) {
         if (null == group || null == producer) {
             return false;
@@ -947,6 +973,9 @@ public class MQClientInstance {
         this.rebalanceService.wakeup();
     }
 
+    /**
+     * consumer rebalance
+     */
     public void doRebalance() {
         for (Map.Entry<String, MQConsumerInner> entry : this.consumerTable.entrySet()) {
             MQConsumerInner impl = entry.getValue();
@@ -964,6 +993,9 @@ public class MQClientInstance {
         return this.producerTable.get(group);
     }
 
+//
+//    筛选消费者
+//
     public MQConsumerInner selectConsumer(final String group) {
         return this.consumerTable.get(group);
     }

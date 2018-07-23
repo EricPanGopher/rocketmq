@@ -31,6 +31,13 @@ import java.util.Iterator;
 /**
  * Calculate bit map of filter.
  */
+
+
+//
+//
+//    bit map commit log dispatcher
+//
+//
 public class CommitLogDispatcherCalcBitMap implements CommitLogDispatcher {
 
     private static final Logger log = LoggerFactory.getLogger(LoggerName.FILTER_LOGGER_NAME);

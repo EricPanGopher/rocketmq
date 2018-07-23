@@ -40,6 +40,9 @@ import org.apache.rocketmq.store.DefaultMessageStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//
+// HA service
+//
 public class HAService {
     private static final Logger log = LoggerFactory.getLogger(LoggerName.STORE_LOGGER_NAME);
 
@@ -297,6 +300,7 @@ public class HAService {
             }
         }
 
+        @Override
         public void run() {
             log.info(this.getServiceName() + " service started");
 

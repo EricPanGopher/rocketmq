@@ -59,6 +59,7 @@ public class RocketmqLog4jAppender extends AppenderSkeleton {
     public RocketmqLog4jAppender() {
     }
 
+    @Override
     public void activateOptions() {
         LogLog.debug("Getting initial context.");
         if (!checkEntryConditions()) {
@@ -74,6 +75,7 @@ public class RocketmqLog4jAppender extends AppenderSkeleton {
     /**
      * Info,error,warn,callback method implementation
      */
+    @Override
     public void append(LoggingEvent event) {
         if (null == producer) {
             return;
@@ -115,11 +117,13 @@ public class RocketmqLog4jAppender extends AppenderSkeleton {
     /**
      * When system exit,this method will be called to close resources
      */
+    @Override
     public synchronized void close() {
         // The synchronized modifier avoids concurrent append and close operations
 
-        if (this.closed)
+        if (this.closed) {
             return;
+        }
 
         LogLog.debug("Closing RocketmqLog4jAppender [" + name + "].");
         this.closed = true;
@@ -133,6 +137,7 @@ public class RocketmqLog4jAppender extends AppenderSkeleton {
         producer = null;
     }
 
+    @Override
     public boolean requiresLayout() {
         return true;
     }

@@ -34,6 +34,10 @@ import org.slf4j.LoggerFactory;
 /**
  * Create MappedFile in advance
  */
+
+//
+//    allocate mappedfile service
+//
 public class AllocateMappedFileService extends ServiceThread {
     private static final Logger log = LoggerFactory.getLogger(LoggerName.STORE_LOGGER_NAME);
     private static int waitTimeOut = 1000 * 5;
@@ -220,8 +224,9 @@ public class AllocateMappedFileService extends ServiceThread {
                 }
             }
         } finally {
-            if (req != null && isSuccess)
+            if (req != null && isSuccess) {
                 req.getCountDownLatch().countDown();
+            }
         }
         return true;
     }
@@ -270,10 +275,11 @@ public class AllocateMappedFileService extends ServiceThread {
             this.mappedFile = mappedFile;
         }
 
+        @Override
         public int compareTo(AllocateRequest other) {
-            if (this.fileSize < other.fileSize)
+            if (this.fileSize < other.fileSize) {
                 return 1;
-            else if (this.fileSize > other.fileSize) {
+            } else if (this.fileSize > other.fileSize) {
                 return -1;
             } else {
                 int mIndex = this.filePath.lastIndexOf(File.separator);
@@ -303,20 +309,26 @@ public class AllocateMappedFileService extends ServiceThread {
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj)
+            if (this == obj) {
                 return true;
-            if (obj == null)
+            }
+            if (obj == null) {
                 return false;
-            if (getClass() != obj.getClass())
+            }
+            if (getClass() != obj.getClass()) {
                 return false;
+            }
             AllocateRequest other = (AllocateRequest) obj;
             if (filePath == null) {
-                if (other.filePath != null)
+                if (other.filePath != null) {
                     return false;
-            } else if (!filePath.equals(other.filePath))
+                }
+            } else if (!filePath.equals(other.filePath)) {
                 return false;
-            if (fileSize != other.fileSize)
+            }
+            if (fileSize != other.fileSize) {
                 return false;
+            }
             return true;
         }
     }

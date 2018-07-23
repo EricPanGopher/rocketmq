@@ -68,23 +68,30 @@ public class PullRequest {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PullRequest other = (PullRequest) obj;
         if (consumerGroup == null) {
-            if (other.consumerGroup != null)
+            if (other.consumerGroup != null) {
                 return false;
-        } else if (!consumerGroup.equals(other.consumerGroup))
+            }
+        } else if (!consumerGroup.equals(other.consumerGroup)) {
             return false;
+        }
         if (messageQueue == null) {
-            if (other.messageQueue != null)
+            if (other.messageQueue != null) {
                 return false;
-        } else if (!messageQueue.equals(other.messageQueue))
+            }
+        } else if (!messageQueue.equals(other.messageQueue)) {
             return false;
+        }
         return true;
     }
 
